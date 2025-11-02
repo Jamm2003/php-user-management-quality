@@ -1,12 +1,12 @@
 <?php
+
 return array(
     "driver" => "mysql",
     "host" => "localhost",
     "user" => "root",
-    "pass" => "", 
+    "pass" => "",
     "database" => "pruebas",
     "charset" => "utf-8"
-    
-    
+
+
 );
-?>

@@ -1,16 +1,20 @@
-<?php 
-class ProductosController extends ControladorBase {
+<?php
+
+class ProductosController extends ControladorBase
+{
     public $conectar;
     public $adapter;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $this->conectar = new Conectar();
         $this->adapter = $this->conectar->conexion();
     }
 
-    public function index() {
+    public function index()
+    {
         // Producto
         $producto = new Producto($this->adapter);
         $allproducts = $producto->getAll();
@@ -27,7 +31,8 @@ class ProductosController extends ControladorBase {
         ));
     }
 
-    public function crear() {
+    public function crear()
+    {
         if (isset($_POST["nombre"])) {
             // Creamos un producto
             $producto = new Producto($this->adapter);
@@ -39,41 +44,44 @@ class ProductosController extends ControladorBase {
         $this->redirect("Productos", "index");
     }
 
-    public function borrar() {
-        if (isset($_GET["id"])) { 
+    public function borrar()
+    {
+        if (isset($_GET["id"])) {
             $id = (int)$_GET["id"];
-            
+
             // Creamos un producto
             $producto = new Producto($this->adapter);
-            $producto->deleteById($id); 
+            $producto->deleteById($id);
         }
         $this->redirect();
     }
-    
-    public function modificar() {
+
+    public function modificar()
+    {
         if (isset($_GET["id"])) {
             $id = (int)$_GET["id"];
-    
+
             // Crear una instancia de Producto
             $producto = new Producto($this->adapter);
             $producto->setId($id);
-    
+
             // Obtener los datos del producto por su ID
             $producto->findById();
-    
+
             // Cargar la vista de edición
             $this->view("editarProducto", array("producto" => $producto));
         }
     }
 
-    public function actualizar() {
+    public function actualizar()
+    {
         if (isset($_POST["id"]) && isset($_POST["nombre"])) {
             // Crear una instancia de Producto
             $producto = new Producto($this->adapter);
-            
+
             // Cargamos el producto existente por su ID
             $producto->setId($_POST["id"]);
-            
+
             // Actualizamos los campos del producto
             $producto->setNombre($_POST["nombre"]);
             $producto->setPrecio($_POST["precio"]);
@@ -81,7 +89,7 @@ class ProductosController extends ControladorBase {
 
             // Llamamos al método update para guardar los cambios
             $update = $producto->update();
-            
+
             if ($update) {
                 echo "Producto actualizado correctamente.";
             } else {
@@ -91,14 +99,13 @@ class ProductosController extends ControladorBase {
         // Redirigir a la vista de edición o a donde sea necesario
     }
 
-    public function hola() {
+    public function hola()
+    {
         // Creamos el objeto producto
         $producto = new Producto($this->adapter);
-        
+
         $productos = new ProductosModel($this->adapter);
         $pro = $productos->getUnProducto();
         var_dump($pro);
     }
 }
-
-?>

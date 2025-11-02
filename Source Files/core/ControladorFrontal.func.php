@@ -1,7 +1,8 @@
 <?php
 // FUNCIONES PARA EL CONTROLADOR FRONTAL
 
-function cargarControlador($controller) {
+function cargarControlador($controller)
+{
     $controlador = ucwords($controller) . 'Controller';
     $strFileController = 'controller/' . $controlador . ".php";
 
@@ -13,7 +14,8 @@ function cargarControlador($controller) {
     $controllerObj = new $controlador();
     return $controllerObj;
 }
-function cargarAccion($controllerObj, $action) {
+function cargarAccion($controllerObj, $action)
+{
     if ($controllerObj !== null && method_exists($controllerObj, $action)) {
         $controllerObj->$action();
     } else {
@@ -22,7 +24,8 @@ function cargarAccion($controllerObj, $action) {
 }
 
 
-function lanzarAccion($controllerObj) {
+function lanzarAccion($controllerObj)
+{
     if (isset($_GET["action"]) && method_exists($controllerObj, $_GET["action"])) {
         cargarAccion($controllerObj, $_GET["action"]);
     } else {

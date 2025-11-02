@@ -1,57 +1,71 @@
 <?php
-class Compra extends EntidadBase {
+
+class Compra extends EntidadBase
+{
     private $id;
     private $producto_id;
     private $fecha_compra;
     private $cantidad;
     private $gasto;
 
-    public function __construct($adapter) {
+    public function __construct($adapter)
+    {
         $table = "compras";
         parent::__construct($table, $adapter);
     }
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    public function getProductoId() {
+    public function getProductoId()
+    {
         return $this->producto_id;
     }
 
-    public function setProductoId($producto_id) {
+    public function setProductoId($producto_id)
+    {
         $this->producto_id = $producto_id;
     }
 
-    public function getFechaCompra() {
+    public function getFechaCompra()
+    {
         return $this->fecha_compra;
     }
 
-    public function setFechaCompra($fecha_compra) {
+    public function setFechaCompra($fecha_compra)
+    {
         $this->fecha_compra = $fecha_compra;
     }
 
-    public function getCantidad() {
+    public function getCantidad()
+    {
         return $this->cantidad;
     }
 
-    public function setCantidad($cantidad) {
+    public function setCantidad($cantidad)
+    {
         $this->cantidad = $cantidad;
     }
 
-    public function getGasto() {
+    public function getGasto()
+    {
         return $this->gasto;
     }
 
-    public function setGasto($gasto) {
+    public function setGasto($gasto)
+    {
         $this->gasto = $gasto;
     }
 
-    public function save() {
+    public function save()
+    {
         $query = "INSERT INTO compras (producto_id, fecha_compra, cantidad, gasto) 
                   VALUES (
                     '" . $this->producto_id . "',
@@ -59,13 +73,14 @@ class Compra extends EntidadBase {
                     '" . $this->cantidad . "',
                     '" . $this->gasto . "'
                   )";
-    
+
         $save = $this->db()->query($query);
-    
+
         return $save;
     }
 
-    public function getAll() {
+    public function getAll()
+    {
         $resultSet = array();
 
         $query = $this->db()->query("SELECT compras.*, productos.nombre AS producto_nombre 
@@ -79,5 +94,3 @@ class Compra extends EntidadBase {
         return $resultSet;
     }
 }
-
-?>

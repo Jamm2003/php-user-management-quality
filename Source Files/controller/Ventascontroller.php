@@ -1,16 +1,20 @@
 <?php
-class VentasController extends ControladorBase {
+
+class VentasController extends ControladorBase
+{
     public $conectar;
     public $adapter;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $this->conectar = new Conectar();
         $this->adapter = $this->conectar->conexion();
     }
 
-    public function index() {
+    public function index()
+    {
         // Crear el objeto de venta
         $venta = new Venta($this->adapter);
 
@@ -29,7 +33,8 @@ class VentasController extends ControladorBase {
         ));
     }
 
-    public function crear() {
+    public function crear()
+    {
         if (isset($_POST["producto_id"]) && isset($_POST["fecha"]) && isset($_POST["cantidad"])) {
             // Crear una venta
             $venta = new Venta($this->adapter);
@@ -41,19 +46,21 @@ class VentasController extends ControladorBase {
         $this->redirect("Ventas", "index");
     }
 
-    public function borrar() {
-        if (isset($_GET["id"])) { 
+    public function borrar()
+    {
+        if (isset($_GET["id"])) {
             $id = (int)$_GET["id"];
-            
+
             $venta = new Venta($this->adapter);
-            $venta->deleteById($id); 
+            $venta->deleteById($id);
         }
         $this->redirect("Ventas", "index");
     }
 
     // Otras acciones relacionadas con ventas...
 
-    public function hola() {
+    public function hola()
+    {
         // Implementación específica de "hola" para ventas
     }
 }
