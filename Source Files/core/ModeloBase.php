@@ -1,18 +1,23 @@
 <?php
-class ModeloBase extends EntidadBase {
+
+class ModeloBase extends EntidadBase
+{
     protected $table;
     private $fluent;
 
-    public function __construct($table, $adapter) {
+    public function __construct($table, $adapter)
+    {
         $this->table = (string) $table;
         parent::__construct($table, $adapter);
         $this->fluent = $this->getConectar()->startFluent();
     }
 
-    public function fluent() {
+    public function fluent()
+    {
         return $this->fluent;
     }
-    public function ejecutarSql($query) {
+    public function ejecutarSql($query)
+    {
         $query = $this->db()->query($query);
         if ($query == true) {
             if ($query->num_rows > 1) {
@@ -34,4 +39,3 @@ class ModeloBase extends EntidadBase {
     }
 
 }
-?>

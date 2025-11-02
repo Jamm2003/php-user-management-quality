@@ -1,4 +1,5 @@
 <?php
+
 //Configuración global
 require_once 'config/global.php';
 
@@ -17,5 +18,3 @@ if (isset($_GET["controller"])) {
     $controllerObj = cargarControlador(CONTROLADOR_DEFECTO);
     lanzarAccion($controllerObj); // Use the same variable name here
 }
-
-?>
